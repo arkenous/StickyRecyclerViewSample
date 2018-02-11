@@ -1,12 +1,12 @@
 package link.k3n.sticky_recyclerview_sample.views.custom
 
 import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.graphics.Canvas
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import link.k3n.sticky_recyclerview_sample.databinding.ListItemHeaderBinding
 
 /**
  * RecyclerView ItemDecoration custom class for RecyclerView Items sticky.
@@ -21,7 +21,7 @@ class StickyHeaderItemDecoration(listener: StickyHeaderInterface) : RecyclerView
     interface StickyHeaderInterface {
         fun getHeaderPositionForItem(itemPosition: Int): Int
         fun getHeaderLayout(headerPosition: Int): Int
-        fun bindHeaderData(binding: ViewDataBinding, header: View, headerPosition: Int)
+        fun bindHeaderData(binding: ListItemHeaderBinding, header: View, headerPosition: Int)
         fun isHeader(itemPosition: Int): Boolean
     }
 
@@ -61,7 +61,7 @@ class StickyHeaderItemDecoration(listener: StickyHeaderInterface) : RecyclerView
         val headerPosition = mListener.getHeaderPositionForItem(itemPosition)
         val layoutResId = mListener.getHeaderLayout(headerPosition)
         // Stickyヘッダレイアウトをinflateする
-        val binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), layoutResId, parent, false) as ViewDataBinding
+        val binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), layoutResId, parent, false) as ListItemHeaderBinding
         val header = binding.root
         mListener.bindHeaderData(binding, header, headerPosition)
         return header
